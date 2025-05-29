@@ -1,93 +1,559 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Menopause Savvy Quiz</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #ffe9e5;
-    }
-    .quiz-container {
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .question {
-      font-size: 1.3em;
-      margin-bottom: 20px;
-    }
-    .answers button {
-      display: block;
-      width: 100%;
-      margin-bottom: 10px;
-      padding: 12px;
-      font-size: 1em;
-      border: none;
-      border-radius: 10px;
-      background-color: #ffa798;
-      color: black;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      font-family: 'Poppins', sans-serif;
-    }
-    .answers button:hover {
-      background-color: #ffd2cb;
-    }
-    .answers button:disabled {
-      cursor: not-allowed;
-      opacity: 0.6;
-      background-color: #ccc;
-    }
-    .answers button.correct-answer {
-      background-color: #8bc34a;
-      color: white;
-    }
-    .answers button.wrong-answer {
-      background-color: #f44336;
-      color: white;
-    }
-    .feedback {
-      margin: 20px 0;
-      font-size: 1em;
-    }
-    .next-btn {
-      background-color: white;
-      color: black;
-      border: 2px solid black;
-      padding: 10px 20px;
-      font-size: 1em;
-      cursor: pointer;
-      border-radius: 10px;
-      font-family: 'Poppins', sans-serif;
-    }
-    .final-screen {
-      text-align: center;
-    }
-    .copy-btn {
-      background-color: white;
-      color: black;
-      border: 2px solid black;
-      padding: 10px 20px;
-      margin-top: 10px;
-      cursor: pointer;
-      border-radius: 10px;
-      font-family: 'Poppins', sans-serif;
-    }
-    .copied {
-      color: green;
-      margin-top: 10px;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What's Your Menopause Spirit Animal?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffe9e5; /* From Menopause Savvy Quiz */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top, not center vertically */
+            min-height: 100vh;
+            padding: 20px; /* Added padding for smaller screens */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+        .quiz-container {
+            max-width: 700px;
+            margin: 40px auto; /* Centered with vertical margin */
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Ensure it takes full width up to max-width */
+        }
+        h1 {
+            font-family: 'Poppins', sans-serif; /* Keep consistent font */
+            font-weight: 700; /* Bold title */
+            color: #333; /* Darker color for main title */
+            font-size: 2.2em; /* Slightly larger for main title */
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .question-section { /* Renamed from .question to better fit single-question context */
+            font-size: 1.3em; /* From Menopause Savvy Quiz */
+            margin-bottom: 20px;
+            text-align: left; /* Align question text left */
+        }
+        .answers {
+            display: flex; /* Use flexbox for vertical stacking */
+            flex-direction: column;
+            gap: 10px; /* Space between buttons */
+            margin-bottom: 20px;
+        }
+        .answers button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: none;
+            border-radius: 10px; /* From Menopause Savvy Quiz */
+            background-color: #ffa798; /* From Menopause Savvy Quiz */
+            color: black;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'Poppins', sans-serif;
+            text-align: left; /* Align text within button to left */
+        }
+        .answers button:hover {
+            background-color: #ffd2cb; /* From Menopause Savvy Quiz */
+        }
+        .answers button:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+            background-color: #ccc;
+        }
+        /* No 'correct-answer' or 'wrong-answer' for Spirit Animal Quiz,
+           but we can use a class to highlight the selected answer if desired. */
+        .answers button.selected-answer {
+            background-color: #8bc34a; /* Green for selected */
+            color: white;
+        }
+        .feedback-section { /* New section for feedback and next button */
+            margin: 20px 0;
+            font-size: 1em;
+            text-align: center; /* Center the feedback and next button */
+        }
+        .next-btn {
+            background-color: white;
+            color: black;
+            border: 2px solid black;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 10px; /* From Menopause Savvy Quiz */
+            font-family: 'Poppins', sans-serif;
+            margin-top: 15px; /* Space above button */
+        }
+        .next-btn:hover {
+            background-color: #f0f0f0; /* Light hover for next button */
+        }
+
+        /* Final Screen Styling */
+        .final-screen {
+            text-align: center;
+        }
+        .final-screen h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #333;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        .final-screen #spirit-animal-name {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #ffa798; /* Use the button color as accent */
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .final-screen p {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        .final-screen #animal-description {
+            margin-top: 20px;
+            text-align: justify;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .share-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed #ddd; /* Similar to original */
+        }
+        .share-message {
+            font-style: italic;
+            color: #777;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+            gap: 10px; /* Space between share buttons */
+            margin-top: 15px;
+        }
+        .share-buttons button {
+            background-color: #007bff; /* A standard blue for sharing */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .share-buttons button:hover {
+            background-color: #0056b3;
+        }
+        .copy-btn {
+            background-color: white;
+            color: black;
+            border: 2px solid black;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .copied {
+            color: green;
+            margin-top: 10px;
+            display: none; /* Hidden by default */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            .question-section {
+                font-size: 1.1em;
+            }
+            .final-screen h2 {
+                font-size: 1.5em;
+            }
+            .final-screen #spirit-animal-name {
+                font-size: 2em;
+            }
+            .share-buttons button {
+                width: calc(50% - 10px); /* Two buttons per row on small screens */
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="quiz-container" id="quiz"></div>
-  <script src="quiz-script.js"></script>
+    <div class="quiz-container" id="quiz-container">
+        </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Q. Your go-to outfit lately is:",
+                answers: [
+                    { text: "Tank tops, flip flops, and baggy pants with hair nowhere near your neck", animal: "Hot Flash Fox" },
+                    { text: "Whatever you forgot you owned", animal: "Brain Fog Bobcat" },
+                    { text: "Layers, so you can match your mood shifts", animal: "Mood Swing Monkey" },
+                    { text: "Pajamas that double as errands-wear (No one will know, right?)", animal: "Sluggish Sloth" },
+                    { text: "A shirt that says “No.”", animal: "Prickly Porcupine" },
+                    { text: "Dramatic, flowy, and emotionally expressive", animal: "Meltdown Macaw" },
+                ]
+            },
+            {
+                question: "Q. What’s your vibe on a girls’ night out?",
+                answers: [
+                    { text: "Instantly regretting sleeves and request a seat next to the AC", animal: "Hot Flash Fox" },
+                    { text: "Forgetting names, drink orders, and where you parked", animal: "Brain Fog Bobcat" },
+                    { text: "Laughing, crying, and yelling “OMG I LOVE YOU GUYS”", animal: "Mood Swing Monkey" },
+                    { text: "“I know I just got here, but I really should get home and get some sleep.”", animal: "Sluggish Sloth" },
+                    { text: "Leaving early because the room was “too loud”", animal: "Prickly Porcupine" },
+                    { text: "Laughing after spilling a cocktail then crying about it like it’s a Greek tragedy", animal: "Meltdown Macaw" },
+                ]
+            },
+            {
+                question: "Q. What phrase best describes your mornings?",
+                answers: [
+                    { text: "Wake. Flash. Regretting these jeans.", animal: "Hot Flash Fox" },
+                    { text: "Wake. Stare. Forgetting your phone passcode - again.", animal: "Brain Fog Bobcat" },
+                    { text: "Wake. Cry. Laugh. Rage-texting your bestie.", animal: "Mood Swing Monkey" },
+                    { text: "Wake. Sit. Considering a nap before lunch.", animal: "Sluggish Sloth" },
+                    { text: "Wake. Snap. Ordering earbuds to wear while your partner eats.", animal: "Prickly Porcupine" },
+                    { text: "Wake. Weep. Dressing in your brightest colors.", animal: "Meltdown Macaw" },
+                ]
+            },
+            {
+                question: "Q. What’s your typical drink order?",
+                answers: [
+                    { text: "Iced everything.", animal: "Hot Flash Fox" },
+                    { text: "I can’t remember what I ordered last time- surprise me.", animal: "Brain Fog Bobcat" },
+                    { text: "Whatever - One sip and suddenly I have opinions. Loud ones.", animal: "Mood Swing Monkey" },
+                    { text: "Anything, just make sure it’s caffeinated please.", animal: "Sluggish Sloth" },
+                    { text: "Calming afternoon herbal tea - I need it after my mid-morning rage.", animal: "Prickly Porcupine" },
+                    { text: "2/3 caff triple ristretto affogato venti, 2 pump mango 1 pump classic, 2%, mango to the second line, 3 scoops protein, 3 scoops berries, 2 scoop matcha, add banana, double blended, with whip, caramel drizzle, salted caramel topping, vanilla bean frappuccino.", animal: "Meltdown Macaw" },
+                ]
+            },
+            {
+                question: "Q. Your internal monologue during a random Tuesday afternoon:",
+                answers: [
+                    { text: "\"Why is it suddenly 500 degrees in here?\"", animal: "Hot Flash Fox" },
+                    { text: "\"What did I come in this room for again?\"", animal: "Brain Fog Bobcat" },
+                    { text: "\"I’m fine. No, I’m furious. Wait, now I’m crying.\"", animal: "Mood Swing Monkey" },
+                    { text: "\"I'm not saying I'm tired, but I could sleep standing up.\"", animal: "Sluggish Sloth" },
+                    { text: "\"If one more person breathes near me, I swear—\"", animal: "Prickly Porcupine" },
+                    { text: "\"I just cried over a cereal commercial. Again.\"", animal: "Meltdown Macaw" },
+                ]
+            },
+            {
+                question: "Q. You open the fridge and forget what you needed. You:",
+                answers: [
+                    { text: "Blame the heat. It’s obviously cooking your brain.", animal: "Hot Flash Fox" },
+                    { text: "Blink slowly and hope it comes back to you.", animal: "Brain Fog Bobcat" },
+                    { text: "Slam it shut and make dinner reservations at your favorite eatery.", animal: "Mood Swing Monkey" },
+                    { text: "Grab some cheese, plop down and take a break.", animal: "Sluggish Sloth" },
+                    { text: "Growl and start reorganizing everything.", animal: "Prickly Porcupine" },
+                    { text: "Sigh loudly like you're the lead actress in a drama.", animal: "Meltdown Macaw" },
+                ]
+            },
+            {
+                question: "Q. How do you respond to compliments?",
+                answers: [
+                    { text: "\"Thanks. I’m sweating through this shirt, though.\"", animal: "Hot Flash Fox" },
+                    { text: "\"You’re so sweet! Wait, what did you say?\"", animal: "Brain Fog Bobcat" },
+                    { text: "\"OMG STOP I’M GONNA CRY.\"", animal: "Mood Swing Monkey" },
+                    { text: "\"Thanks. It was such an effort to make this happen.”", animal: "Sluggish Sloth" },
+                    { text: "\"Took long enough, honestly.\"", animal: "Prickly Porcupine" },
+                    { text: "\"Thanks! I’m not always this emotional… just kidding, yes I am, it's the hormones.\"", animal: "Meltdown Macaw" },
+                ]
+            },
+            {
+                question: "Q. How’s your relationship with your body?",
+                answers: [
+                    { text: "It’s in combustion mode, thanks for asking", animal: "Hot Flash Fox" },
+                    { text: "It’s… familiar, but I forget the details", animal: "Brain Fog Bobcat" },
+                    { text: "We fight. We make up. It’s complicated.", animal: "Mood Swing Monkey" },
+                    { text: "It’s working hard. So am I. We’ll get there eventually.", animal: "Sluggish Sloth" },
+                    { text: "It protests a lot. I protest harder.", animal: "Prickly Porcupine" },
+                    { text: "Honestly? We’re in a full soap opera.", animal: "Meltdown Macaw" },
+                ]
+            },
+            {
+                question: "Q. You just cried because:",
+                answers: [
+                    { text: "You overheated in the dentist chair", animal: "Hot Flash Fox" },
+                    { text: "You forgot your address - Wait is it 3584 or 8354?", animal: "Brain Fog Bobcat" },
+                    { text: "You thought someone looked at you weird", animal: "Mood Swing Monkey" },
+                    { text: "Crying requires energy. Pass.", animal: "Sluggish Sloth" },
+                    { text: "Someone told you to “smile more”", animal: "Prickly Porcupine" },
+                    { text: "You felt the whole room judging you", animal: "Meltdown Macaw" },
+                ]
+            },
+            {
+                question: "Q. What’s your peri/menopause superpower?",
+                answers: [
+                    { text: "Guessing what the thermostat temperature is set at", animal: "Hot Flash Fox" },
+                    { text: "Magic - I have a thought, then Poof! It’s gone", animal: "Brain Fog Bobcat" },
+                    { text: "Shifting emotional gears without a clutch", animal: "Mood Swing Monkey" },
+                    { text: "Falling asleep anywhere, anytime, forever", animal: "Sluggish Sloth" },
+                    { text: "Silencing people with a single glare", animal: "Prickly Porcupine" },
+                    { text: "Suddenly laughing hysterically then crying uncontrollably.", animal: "Meltdown Macaw" },
+                ]
+            },
+            {
+                question: "Q. Describe your texting style.",
+                answers: [
+                    { text: "All emojis. Mostly flames.", animal: "Hot Flash Fox" },
+                    { text: "Forgetting to respond for 3 days", animal: "Brain Fog Bobcat" },
+                    { text: "ALL CAPS THEN APOLOGIES", animal: "Mood Swing Monkey" },
+                    { text: "Short, sweet, and often cut off mid—", animal: "Sluggish Sloth" },
+                    { text: "Passive-aggressive punctuation. Period.", animal: "Prickly Porcupine" },
+                    { text: "Long, emotional essays with GIFs of crying cats", animal: "Meltdown Macaw" },
+                ]
+            },
+            {
+                question: "Q. How do you describe menopause?",
+                answers: [
+                    { text: "“It’s like wearing a heated blanket on the inside.”", animal: "Hot Flash Fox" },
+                    { text: "“You forget what you’re saying halfway through explaining it.”", animal: "Brain Fog Bobcat" },
+                    { text: "“Feelings. All the feelings. None of them make sense.”", animal: "Mood Swing Monkey" },
+                    { text: "“You’re tired, so tired.”", animal: "Sluggish Sloth" },
+                    { text: "“Every little sound is a personal attack.”", animal: "Prickly Porcupine" },
+                    { text: "“Imagine PMS. Now give it a crown and a megaphone.”", animal: "Meltdown Macaw" },
+                ]
+            },
+            {
+                question: "Q. If you had a peri/menopause motto, it would be:",
+                answers: [
+                    { text: "“It's not easy being this hot.”", animal: "Hot Flash Fox" },
+                    { text: "“Remember. Speak. Forget. Repeat.”", animal: "Brain Fog Bobcat" },
+                    { text: "“Strap in and enjoy the ride!”", animal: "Mood Swing Monkey" },
+                    { text: "“Everything is better after a nap.”", animal: "Sluggish Sloth" },
+                    { text: "“Approach with caution.”", animal: "Prickly Porcupine" },
+                    { text: "“It’s not an overreaction if it’s justified.”", animal: "Meltdown Macaw" },
+                ]
+            },
+        ];
+
+        const animalProfiles = {
+            "Hot Flash Fox": {
+                symptom: "Sudden unpredictable hot flashes",
+                tagline: "No warning, all drama, maximum heat.",
+                description: "Fast, furious, and completely uninvited—just like a hot flash during a dinner party. Quick, clever, and always ready to shed your coat. You radiate heat and charisma—mostly because your body is literally on fire. One second you're fine, the next you’re fanning yourself with a takeout menu and whisper-shouting “Is it hot in here?!” Graceful under pressure (and sweat), you’re sly, striking, and a total smoke show—even when your internal thermostat is broken."
+            },
+            "Brain Fog Bobcat": {
+                symptom: "Memory lapses and forgetfulness",
+                tagline: "Living in the moment… because the last one’s already gone.",
+                description: "Can’t remember why you walked into the kitchen? Elusive thoughts, mysterious errands, and mid-sentence memory vanishes? Mysterious. Elusive. Occasionally spotted, but never caught. You’re in your Bobcat era. Wildly intelligent but prone to sudden vanishing acts. You roam the mental wilderness with flashes of brilliance followed by—wait, what were we talking about again? You're agile, intuitive, and always circling back… eventually."
+            },
+            "Mood Swing Monkey": {
+                symptom: "Emotional instability",
+                tagline: "Unpredictable. Adorable. Probably crying.",
+                description: "Swinging from wild rage to weeping to existential crisis—in under 60 seconds. You’re vibrant, emotional, and unfiltered—in the most honest way possible. One minute you’re tossing bananas, the next you’re hugging strangers and pondering the meaning of life. Chaos? Maybe. Authentic? Absolutely. You feel deeply, react loudly, and love hard—even if your mascara doesn’t always survive the journey."
+            },
+            "Sluggish Sloth": {
+                symptom: "Slowed metabolism and fatigue",
+                tagline: "Metabolically challenged, but emotionally evolved.",
+                description: "Moves slow. Digests slow. Still fabulous—but naps are essential. You’re the nap queen, the energy minimalist, the master of doing less… but better. You glide through midlife at your own pace—with snacks in hand and zero guilt about canceling plans. Graceful in slow motion, majestic in stretchy pants, and completely unbothered by hustle culture. Resting is your cardio—and honestly, it’s iconic."
+            },
+            "Prickly Porcupine": {
+                symptom: "Irritability and overstimulation",
+                tagline: "Looks soft. Actually very sharp.",
+                description: "Don’t talk to her before coffee, or after coffee. Actually—just don’t. You don’t tolerate fools—or noise—or crowds. And while you may look cuddly, you’ve got invisible quills and a short fuse. Your boundaries are sharp, your patience is limited, and your glare could silence your neighbor’s yapping dog. It’s not that you don’t like people… okay, maybe it is. But under that prickly exterior? A heart of gold—just don’t make any sudden movements."
+            },
+            "Meltdown Macaw": {
+                symptom: "Sudden emotional outbursts (aka midlife drama flares)",
+                tagline: "Flare-ups, but make them fabulous.",
+                description: "Gorgeous, dramatic, and completely justified in every overreaction. Big feelings, big reactions, big presence. You feel everything deeply, and express it loudly—with flair, feathers, and zero apologies. You’re the queen of “Did I overreact?” (Answer: Never.) Your moods come with sound effects, hand gestures, and occasional costume changes. Subtlety isn’t your style—and that’s exactly why everyone remembers you."
+            }
+        };
+
+        const quizContainer = document.getElementById('quiz-container');
+        let currentQuestionIndex = 0;
+        const animalScores = {}; // To tally points for each animal
+
+        // Initialize scores for all animals
+        Object.keys(animalProfiles).forEach(animal => {
+            animalScores[animal] = 0;
+        });
+
+        // Function to shuffle an array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Function to display a single question
+        function showQuestion(qIndex) {
+            const q = questions[qIndex];
+            quizContainer.innerHTML = `
+                <h1>What's Your Menopause Spirit Animal?</h1>
+                <div class="question-section">
+                    ${q.question}
+                </div>
+                <div class="answers"></div>
+                <div class="feedback-section" id="feedback-section"></div>
+            `;
+
+            const answersDiv = quizContainer.querySelector(".answers");
+            const shuffledAnswers = [...q.answers]; // Create a copy to shuffle
+            shuffleArray(shuffledAnswers);
+
+            shuffledAnswers.forEach((answerData, aIndex) => {
+                const button = document.createElement("button");
+                button.textContent = answerData.text;
+                button.dataset.animal = answerData.animal; // Store animal name in dataset
+                button.onclick = (event) => handleAnswer(event.target);
+                answersDiv.appendChild(button);
+            });
+        }
+
+        // Function to handle answer click
+        function handleAnswer(clickedButton) {
+            // Disable all answer buttons for the current question
+            const answerButtons = quizContainer.querySelectorAll('.answers button');
+            answerButtons.forEach(button => {
+                button.disabled = true;
+            });
+
+            // Highlight the selected answer
+            clickedButton.classList.add('selected-answer');
+
+            // Record the score for the selected animal
+            const selectedAnimal = clickedButton.dataset.animal;
+            animalScores[selectedAnimal]++;
+
+            // Display a generic feedback message and the "Next Question" button
+            const feedbackSection = document.getElementById("feedback-section");
+            feedbackSection.innerHTML = `
+                <p>Thanks for your answer!</p>
+                <button class="next-btn" onclick="nextQuestion()">
+                    ${currentQuestionIndex === questions.length - 1 ? 'Find My Spirit Animal!' : 'Next Question'}
+                </button>
+            `;
+        }
+
+        // Function to advance to the next question or show final screen
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                showQuestion(currentQuestionIndex);
+            } else {
+                showFinalScreen();
+            }
+        }
+
+        // Function to determine and display the final Spirit Animal
+        function showFinalScreen() {
+            let maxScore = -1;
+            let topAnimals = [];
+
+            for (const animal in animalScores) {
+                if (animalScores[animal] > maxScore) {
+                    maxScore = animalScores[animal];
+                    topAnimals = [animal]; // Start new list if a new max is found
+                } else if (animalScores[animal] === maxScore) {
+                    topAnimals.push(animal); // Add to list if tied
+                }
+            }
+
+            // Handle ties: randomly select one from topAnimals
+            const finalSpiritAnimal = topAnimals[Math.floor(Math.random() * topAnimals.length)];
+            const profile = animalProfiles[finalSpiritAnimal];
+
+            quizContainer.innerHTML = `
+                <div class="final-screen">
+                    <h2>Your Spirit Animal Is...</h2>
+                    <h3 id="spirit-animal-name">${finalSpiritAnimal}</h3>
+                    <p id="symptom-sidekick">Symptom Sidekick: ${profile.symptom}</p>
+                    <p id="tagline">Tagline: “${profile.tagline}”</p>
+                    <p id="animal-description">${profile.description}</p>
+
+                    <div class="share-section">
+                        <p class="share-message">Now that you know your spirit animal, don’t let menopause symptoms boss you around. Midlife isn’t a crisis—it’s a comeback. Share and compare with your friends!</p>
+                        <button class="copy-btn" onclick="shareResults('${finalSpiritAnimal}')">Click. Copy. Share. Empower another woman.</button>
+                        <p id="copiedText" class="copied"></p>
+                        <div class="share-buttons">
+                            <button onclick="shareOnFacebook('${finalSpiritAnimal}')">Share on Facebook</button>
+                            <button onclick="shareOnTwitter('${finalSpiritAnimal}')">Share on X</button>
+                            <button onclick="shareOnWhatsApp('${finalSpiritAnimal}')">Share on WhatsApp</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- Sharing Functions ---
+        function getShareMessage(animal) {
+             // Use window.location.href to get the current page URL for sharing
+            return `My Menopause Spirit Animal is ${animal}! Now that I know my spirit animal, I won’t let menopause symptoms boss me around. Midlife isn’t a crisis—it’s a comeback. Find yours: ${window.location.href}`;
+        }
+
+        function shareResults(animal) {
+            const shareText = getShareMessage(animal);
+            const quizUrl = window.location.href; // The URL of the quiz page
+
+            if (navigator.share) {
+                navigator.share({
+                    title: `My Menopause Spirit Animal: ${animal}`,
+                    text: shareText,
+                    url: quizUrl
+                })
+                .then(() => {
+                    document.getElementById("copiedText").textContent = "✔️ Shared successfully!";
+                    document.getElementById("copiedText").style.display = "block";
+                })
+                .catch((error) => {
+                    console.error('Error sharing:', error);
+                    copyToClipboard(shareText); // Fallback to copy if native share fails
+                });
+            } else {
+                copyToClipboard(shareText);
+            }
+        }
+
+        function copyToClipboard(text) {
+            const dummy = document.createElement("textarea");
+            dummy.value = text;
+            document.body.appendChild(dummy);
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            document.getElementById("copiedText").textContent = "✔️ Message copied to clipboard!";
+            document.getElementById("copiedText").style.display = "block";
+        }
+
+        function shareOnFacebook(animal) {
+            const shareText = encodeURIComponent(getShareMessage(animal));
+            const shareUrl = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}&quote=${shareText}`, '_blank');
+        }
+
+        function shareOnTwitter(animal) {
+            const shareText = encodeURIComponent(getShareMessage(animal));
+            window.open(`https://twitter.com/intent/tweet?text=${shareText}`, '_blank');
+        }
+
+        function shareOnWhatsApp(animal) {
+            const shareText = encodeURIComponent(getShareMessage(animal));
+            window.open(`https://api.whatsapp.com/send?text=${shareText}`, '_blank');
+        }
+
+
+        // Initialize the quiz when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            showQuestion(currentQuestionIndex);
+        });
+    </script>
 </body>
 </html>
