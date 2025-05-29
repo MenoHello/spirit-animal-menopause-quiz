@@ -26,15 +26,17 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 100%; /* Ensure it takes full width up to max-width */
         }
-        h1 {
+        /* No h1 for quiz title anymore, question acts as main heading */
+        .question-heading { /* New class for question acting as title */
             font-family: 'Poppins', sans-serif; /* Keep consistent font */
             font-weight: 700; /* Bold title */
             color: #333; /* Darker color for main title */
             font-size: 2.2em; /* Slightly larger for main title */
             margin-bottom: 25px;
             text-align: center;
+            line-height: 1.2;
         }
-        .question-section { /* Renamed from .question to better fit single-question context */
+        .question-text { /* Renamed from .question-section to avoid conflict with former h1 slot */
             font-size: 1.3em; /* From Menopause Savvy Quiz */
             margin-bottom: 20px;
             text-align: left; /* Align question text left */
@@ -67,8 +69,6 @@
             opacity: 0.6;
             background-color: #ccc;
         }
-        /* No 'correct-answer' or 'wrong-answer' for Spirit Animal Quiz,
-           but we can use a class to highlight the selected answer if desired. */
         .answers button.selected-answer {
             background-color: #8bc34a; /* Green for selected */
             color: white;
@@ -100,7 +100,7 @@
         .final-screen h2 {
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
-            color: #333;
+            color: #333; /* Consistent color */
             font-size: 1.8em;
             margin-bottom: 15px;
         }
@@ -114,8 +114,9 @@
         .final-screen p {
             font-size: 1em;
             line-height: 1.6;
-            color: #555;
+            color: #333; /* Ensures text is not faded/gray */
             margin-bottom: 8px;
+            font-style: normal; /* Remove italics */
         }
         .final-screen #animal-description {
             margin-top: 20px;
@@ -127,44 +128,39 @@
 
         .share-section {
             margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px dashed #ddd; /* Similar to original */
+            padding: 20px; /* Padding for the section */
+            background-color: #f8f8f8; /* Background color for differentiation */
+            border-radius: 12px; /* Match container border-radius */
+            text-align: center; /* Center content within this section */
         }
         .share-message {
-            font-style: italic;
-            color: #777;
+            font-style: normal; /* Remove italics */
+            color: #333; /* Consistent color */
             margin-bottom: 15px;
             font-size: 0.95em;
         }
-        .share-buttons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
-            gap: 10px; /* Space between share buttons */
+        .share-buttons { /* This was originally a container for multiple buttons, now it's for one */
             margin-top: 15px;
         }
         .share-buttons button {
-            background-color: #007bff; /* A standard blue for sharing */
-            color: white;
-            padding: 10px 20px;
+            background-color: #ffa798; /* Consistent with other quiz buttons */
+            color: black; /* Consistent with other quiz buttons */
+            padding: 12px 25px;
             border: none;
-            border-radius: 5px;
-            font-size: 0.9em;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600; /* Make share button text bolder */
             cursor: pointer;
             transition: background-color 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            display: inline-block; /* Ensure it's not full width if not needed */
+            margin: 0 auto; /* Center button */
         }
         .share-buttons button:hover {
-            background-color: #0056b3;
+            background-color: #ffd2cb;
         }
-        .copy-btn {
-            background-color: white;
-            color: black;
-            border: 2px solid black;
-            padding: 10px 20px;
-            margin-top: 10px;
-            cursor: pointer;
-            border-radius: 10px;
-            font-family: 'Poppins', sans-serif;
+        .copy-btn { /* Re-purposed to be the main share button */
+            display: none; /* Hide the old copy button */
         }
         .copied {
             color: green;
@@ -174,10 +170,10 @@
 
         /* Responsive adjustments */
         @media (max-width: 600px) {
-            h1 {
+            .question-heading {
                 font-size: 1.8em;
             }
-            .question-section {
+            .question-text {
                 font-size: 1.1em;
             }
             .final-screen h2 {
@@ -187,7 +183,8 @@
                 font-size: 2em;
             }
             .share-buttons button {
-                width: calc(50% - 10px); /* Two buttons per row on small screens */
+                width: auto; /* Allow natural width */
+                padding: 10px 20px;
             }
         }
     </style>
@@ -199,7 +196,7 @@
     <script>
         const questions = [
             {
-                question: "Q. Your go-to outfit lately is:",
+                question: "Your go-to outfit lately is:",
                 answers: [
                     { text: "Tank tops, flip flops, and baggy pants with hair nowhere near your neck", animal: "Hot Flash Fox" },
                     { text: "Whatever you forgot you owned", animal: "Brain Fog Bobcat" },
@@ -210,7 +207,7 @@
                 ]
             },
             {
-                question: "Q. What’s your vibe on a girls’ night out?",
+                question: "What’s your vibe on a girls’ night out?",
                 answers: [
                     { text: "Instantly regretting sleeves and request a seat next to the AC", animal: "Hot Flash Fox" },
                     { text: "Forgetting names, drink orders, and where you parked", animal: "Brain Fog Bobcat" },
@@ -221,7 +218,7 @@
                 ]
             },
             {
-                question: "Q. What phrase best describes your mornings?",
+                question: "What phrase best describes your mornings?",
                 answers: [
                     { text: "Wake. Flash. Regretting these jeans.", animal: "Hot Flash Fox" },
                     { text: "Wake. Stare. Forgetting your phone passcode - again.", animal: "Brain Fog Bobcat" },
@@ -232,7 +229,7 @@
                 ]
             },
             {
-                question: "Q. What’s your typical drink order?",
+                question: "What’s your typical drink order?",
                 answers: [
                     { text: "Iced everything.", animal: "Hot Flash Fox" },
                     { text: "I can’t remember what I ordered last time- surprise me.", animal: "Brain Fog Bobcat" },
@@ -243,7 +240,7 @@
                 ]
             },
             {
-                question: "Q. Your internal monologue during a random Tuesday afternoon:",
+                question: "Your internal monologue during a random Tuesday afternoon:",
                 answers: [
                     { text: "\"Why is it suddenly 500 degrees in here?\"", animal: "Hot Flash Fox" },
                     { text: "\"What did I come in this room for again?\"", animal: "Brain Fog Bobcat" },
@@ -254,7 +251,7 @@
                 ]
             },
             {
-                question: "Q. You open the fridge and forget what you needed. You:",
+                question: "You open the fridge and forget what you needed. You:",
                 answers: [
                     { text: "Blame the heat. It’s obviously cooking your brain.", animal: "Hot Flash Fox" },
                     { text: "Blink slowly and hope it comes back to you.", animal: "Brain Fog Bobcat" },
@@ -265,7 +262,7 @@
                 ]
             },
             {
-                question: "Q. How do you respond to compliments?",
+                question: "How do you respond to compliments?",
                 answers: [
                     { text: "\"Thanks. I’m sweating through this shirt, though.\"", animal: "Hot Flash Fox" },
                     { text: "\"You’re so sweet! Wait, what did you say?\"", animal: "Brain Fog Bobcat" },
@@ -276,7 +273,7 @@
                 ]
             },
             {
-                question: "Q. How’s your relationship with your body?",
+                question: "How’s your relationship with your body?",
                 answers: [
                     { text: "It’s in combustion mode, thanks for asking", animal: "Hot Flash Fox" },
                     { text: "It’s… familiar, but I forget the details", animal: "Brain Fog Bobcat" },
@@ -287,7 +284,7 @@
                 ]
             },
             {
-                question: "Q. You just cried because:",
+                question: "You just cried because:",
                 answers: [
                     { text: "You overheated in the dentist chair", animal: "Hot Flash Fox" },
                     { text: "You forgot your address - Wait is it 3584 or 8354?", animal: "Brain Fog Bobcat" },
@@ -298,7 +295,7 @@
                 ]
             },
             {
-                question: "Q. What’s your peri/menopause superpower?",
+                question: "What’s your peri/menopause superpower?",
                 answers: [
                     { text: "Guessing what the thermostat temperature is set at", animal: "Hot Flash Fox" },
                     { text: "Magic - I have a thought, then Poof! It’s gone", animal: "Brain Fog Bobcat" },
@@ -309,7 +306,7 @@
                 ]
             },
             {
-                question: "Q. Describe your texting style.",
+                question: "Describe your texting style.",
                 answers: [
                     { text: "All emojis. Mostly flames.", animal: "Hot Flash Fox" },
                     { text: "Forgetting to respond for 3 days", animal: "Brain Fog Bobcat" },
@@ -320,7 +317,7 @@
                 ]
             },
             {
-                question: "Q. How do you describe menopause?",
+                question: "How do you describe menopause?",
                 answers: [
                     { text: "“It’s like wearing a heated blanket on the inside.”", animal: "Hot Flash Fox" },
                     { text: "“You forget what you’re saying halfway through explaining it.”", animal: "Brain Fog Bobcat" },
@@ -331,7 +328,7 @@
                 ]
             },
             {
-                question: "Q. If you had a peri/menopause motto, it would be:",
+                question: "If you had a peri/menopause motto, it would be:",
                 answers: [
                     { text: "“It's not easy being this hot.”", animal: "Hot Flash Fox" },
                     { text: "“Remember. Speak. Forget. Repeat.”", animal: "Brain Fog Bobcat" },
@@ -376,6 +373,26 @@
             }
         };
 
+        const animalConfirmations = [
+            "Nice choice—you’re clearly in touch with your inner animal!",
+            "That answer's got spirit—just like you!",
+            "Wild instincts! Let’s keep going.",
+            "Another step closer to your spirit animal reveal!",
+            "You’re answering like a pro—fierce and fabulous.",
+            "That one came straight from the animal within!",
+            "Paw-sitively perfect pick!",
+            "Your spirit animal is starting to emerge…",
+            "You’re moving through this quiz like a cheetah with purpose!",
+            "You’ve got the instincts of a wild thing.",
+            "You’re answering like someone who knows their wild side.",
+            "That pick? Pure animal magnetism.",
+            "Each answer reveals a little more of your menopause magic.",
+            "You're navigating this jungle like a wise owl.",
+            "You clearly know yourself well.",
+            "Your animal energy is rising—onward!"
+        ];
+
+
         const quizContainer = document.getElementById('quiz-container');
         let currentQuestionIndex = 0;
         const animalScores = {}; // To tally points for each animal
@@ -397,10 +414,7 @@
         function showQuestion(qIndex) {
             const q = questions[qIndex];
             quizContainer.innerHTML = `
-                <h1>What's Your Menopause Spirit Animal?</h1>
-                <div class="question-section">
-                    ${q.question}
-                </div>
+                <h1 class="question-heading">${q.question}</h1>
                 <div class="answers"></div>
                 <div class="feedback-section" id="feedback-section"></div>
             `;
@@ -433,10 +447,13 @@
             const selectedAnimal = clickedButton.dataset.animal;
             animalScores[selectedAnimal]++;
 
-            // Display a generic feedback message and the "Next Question" button
+            // Get a random confirmation message
+            const randomConfirmation = animalConfirmations[Math.floor(Math.random() * animalConfirmations.length)];
+
+            // Display feedback message and the "Next Question" button
             const feedbackSection = document.getElementById("feedback-section");
             feedbackSection.innerHTML = `
-                <p>Thanks for your answer!</p>
+                <p>${randomConfirmation}</p>
                 <button class="next-btn" onclick="nextQuestion()">
                     ${currentQuestionIndex === questions.length - 1 ? 'Find My Spirit Animal!' : 'Next Question'}
                 </button>
@@ -475,19 +492,16 @@
                 <div class="final-screen">
                     <h2>Your Spirit Animal Is...</h2>
                     <h3 id="spirit-animal-name">${finalSpiritAnimal}</h3>
-                    <p id="symptom-sidekick">Symptom Sidekick: ${profile.symptom}</p>
-                    <p id="tagline">Tagline: “${profile.tagline}”</p>
+                    <p id="symptom-sidekick"><b>Symptom Sidekick:</b> ${profile.symptom}</p>
+                    <p id="tagline"><b>Tagline:</b> “${profile.tagline}”</p>
                     <p id="animal-description">${profile.description}</p>
 
                     <div class="share-section">
-                        <p class="share-message">Now that you know your spirit animal, don’t let menopause symptoms boss you around. Midlife isn’t a crisis—it’s a comeback. Share and compare with your friends!</p>
-                        <button class="copy-btn" onclick="shareResults('${finalSpiritAnimal}')">Click. Copy. Share. Empower another woman.</button>
-                        <p id="copiedText" class="copied"></p>
+                        <p class="share-message">Spirit animal unlocked. Menopause symptoms? Not the boss of you. Midlife is your comeback era—own it.</p>
                         <div class="share-buttons">
-                            <button onclick="shareOnFacebook('${finalSpiritAnimal}')">Share on Facebook</button>
-                            <button onclick="shareOnTwitter('${finalSpiritAnimal}')">Share on X</button>
-                            <button onclick="shareOnWhatsApp('${finalSpiritAnimal}')">Share on WhatsApp</button>
+                            <button onclick="shareResults('${finalSpiritAnimal}')">Share and compare with your friends!</button>
                         </div>
+                        <p id="copiedText" class="copied"></p>
                     </div>
                 </div>
             `;
@@ -496,7 +510,7 @@
         // --- Sharing Functions ---
         function getShareMessage(animal) {
              // Use window.location.href to get the current page URL for sharing
-            return `My Menopause Spirit Animal is ${animal}! Now that I know my spirit animal, I won’t let menopause symptoms boss me around. Midlife isn’t a crisis—it’s a comeback. Find yours: ${window.location.href}`;
+            return `My Menopause Spirit Animal is ${animal}! Spirit animal unlocked. Menopause symptoms? Not the boss of me. Midlife is my comeback era—I'm owning it. Find yours: ${window.location.href}`;
         }
 
         function shareResults(animal) {
@@ -532,23 +546,6 @@
             document.getElementById("copiedText").textContent = "✔️ Message copied to clipboard!";
             document.getElementById("copiedText").style.display = "block";
         }
-
-        function shareOnFacebook(animal) {
-            const shareText = encodeURIComponent(getShareMessage(animal));
-            const shareUrl = encodeURIComponent(window.location.href);
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}&quote=${shareText}`, '_blank');
-        }
-
-        function shareOnTwitter(animal) {
-            const shareText = encodeURIComponent(getShareMessage(animal));
-            window.open(`https://twitter.com/intent/tweet?text=${shareText}`, '_blank');
-        }
-
-        function shareOnWhatsApp(animal) {
-            const shareText = encodeURIComponent(getShareMessage(animal));
-            window.open(`https://api.whatsapp.com/send?text=${shareText}`, '_blank');
-        }
-
 
         // Initialize the quiz when the page loads
         document.addEventListener('DOMContentLoaded', () => {
