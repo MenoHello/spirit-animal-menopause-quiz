@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menopause Savvy Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #ffe9e5;
+    }
+    .quiz-container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      font-size: 1.3em;
+      margin-bottom: 20px;
+    }
+    .answers button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 12px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      background-color: #ffa798;
+      color: black;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-family: 'Poppins', sans-serif;
+    }
+    .answers button:hover {
+      background-color: #ffd2cb;
+    }
+    .answers button:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+      background-color: #ccc;
+    }
+    .answers button.correct-answer {
+      background-color: #8bc34a;
+      color: white;
+    }
+    .answers button.wrong-answer {
+      background-color: #f44336;
+      color: white;
+    }
+    .feedback {
+      margin: 20px 0;
+      font-size: 1em;
+    }
+    .next-btn {
+      background-color: white;
+      color: black;
+      border: 2px solid black;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .final-screen {
+      text-align: center;
+    }
+    .copy-btn {
+      background-color: white;
+      color: black;
+      border: 2px solid black;
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .copied {
+      color: green;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container" id="quiz"></div>
+  <script src="quiz-script.js"></script>
+</body>
+</html>
