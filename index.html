@@ -126,48 +126,116 @@
             margin-right: auto;
         }
 
-        .share-section {
-            margin-top: 30px;
-            padding: 20px; /* Padding for the section */
-            background-color: #f8f8f8; /* Background color for differentiation */
-            border-radius: 12px; /* Match container border-radius */
-            text-align: center; /* Center content within this section */
-        }
-        .share-message {
-            font-style: normal; /* Remove italics */
-            color: #333; /* Consistent color */
-            margin-bottom: 15px;
-            font-size: 0.95em;
-        }
-        .share-buttons { /* This was originally a container for multiple buttons, now it's for one */
-            margin-top: 15px;
-        }
-        .share-buttons button {
-            background-color: #ffa798; /* Consistent with other quiz buttons */
-            color: black; /* Consistent with other quiz buttons */
-            padding: 12px 25px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1em;
-            font-weight: 600; /* Make share button text bolder */
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-family: 'Poppins', sans-serif;
-            display: inline-block; /* Ensure it's not full width if not needed */
-            margin: 0 auto; /* Center button */
-        }
-        .share-buttons button:hover {
-            background-color: #ffd2cb;
-        }
-        .copy-btn { /* Re-purposed to be the main share button */
-            display: none; /* Hide the old copy button */
-        }
-        .copied {
-            color: green;
-            margin-top: 10px;
-            display: none; /* Hidden by default */
-        }
+        /* New CTA Section Styles */
+        .cta-section {
+    background-color: #E4E4E4;
+    border-radius: 20px;
+    padding: 40px 24px;
+    font-family: 'Poppins', sans-serif;
+    color: #000;
+    max-width: 800px;
+    margin: 30px auto 0 auto;
+}
 
+.cta-section h2 {
+    font-size: 28px;
+    margin-bottom: 16px;
+    text-align: center;
+    color: #000;
+}
+
+.cta-section > p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    text-align: center;
+    color: #000;
+}
+
+.cta-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cta-card {
+    display: block;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    text-decoration: none;
+    color: #000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.cta-card:hover {
+    background-color: #ffe0e0;
+    transform: translateY(-2px);
+}
+
+.cta-card-title {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* ADD THIS LINE TO CENTER THE CONTENT */
+    justify-content: center;
+}
+
+.cta-card-text {
+    font-size: 15px;
+    line-height: 1.5;
+    /* Optional: Center the text description too if desired */
+    /* text-align: center; */
+}
+
+.cta-final {
+    font-style: italic;
+    font-size: 16px;
+    text-align: center;
+    color: #000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .question-heading {
+        font-size: 1.8em;
+    }
+    .question-text {
+        font-size: 1.1em;
+    }
+    .final-screen h2 {
+        font-size: 1.5em;
+    }
+    .final-screen #spirit-animal-name {
+        font-size: 2em;
+    }
+    .share-buttons button {
+        width: auto;
+        padding: 10px 20px;
+    }
+    .cta-section {
+        padding: 24px 16px;
+    }
+    .cta-section h2 {
+        font-size: 24px;
+    }
+    .cta-card {
+        padding: 18px;
+    }
+    .cta-card-title {
+        font-size: 16px;
+    }
+    .cta-card-text {
+        font-size: 14px;
+    }
+}
         /* Responsive adjustments */
         @media (max-width: 600px) {
             .question-heading {
@@ -186,12 +254,27 @@
                 width: auto; /* Allow natural width */
                 padding: 10px 20px;
             }
+            .cta-section {
+                padding: 24px 16px; /* Adjust padding for smaller screens */
+            }
+            .cta-section h2 {
+                font-size: 24px;
+            }
+            .cta-card {
+                padding: 18px;
+            }
+            .cta-card-title {
+                font-size: 16px;
+            }
+            .cta-card-text {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="quiz-container" id="quiz-container">
-        </div>
+    </div>
 
     <script>
         const questions = [
@@ -199,11 +282,10 @@
                 question: "Your go-to outfit lately is:",
                 answers: [
                     { text: "Tank tops, flip flops, and baggy pants with hair nowhere near your neck", animal: "Hot Flash Fox" },
-                    { text: "Whatever you forgot you owned", animal: "Brain Fog Bobcat" },
-                    { text: "Layers, so you can match your mood shifts", animal: "Mood Swing Monkey" },
+                    { text: "Not what you intended to because you forgot to do the laundry", animal: "Brain Fog Bobcat" },
+                    { text: "Black.", animal: "Mood Swing Monkey" },
                     { text: "Pajamas that double as errands-wear (No one will know, right?)", animal: "Sluggish Sloth" },
-                    { text: "A shirt that says “No.”", animal: "Prickly Porcupine" },
-                    { text: "Dramatic, flowy, and emotionally expressive", animal: "Meltdown Macaw" },
+                    { text: "A T-shirt that says “No.”", animal: "Prickly Porcupine" },
                 ]
             },
             {
@@ -212,108 +294,98 @@
                     { text: "Instantly regretting sleeves and request a seat next to the AC", animal: "Hot Flash Fox" },
                     { text: "Forgetting names, drink orders, and where you parked", animal: "Brain Fog Bobcat" },
                     { text: "Laughing, crying, and yelling “OMG I LOVE YOU GUYS”", animal: "Mood Swing Monkey" },
-                    { text: "“I know I just got here, but I really should get home and get some sleep.”", animal: "Sluggish Sloth" },
+                    { text: "I know I just got here, but I really should get home and get some sleep.", animal: "Sluggish Sloth" },
                     { text: "Leaving early because the room was “too loud”", animal: "Prickly Porcupine" },
-                    { text: "Laughing after spilling a cocktail then crying about it like it’s a Greek tragedy", animal: "Meltdown Macaw" },
                 ]
             },
             {
                 question: "What phrase best describes your mornings?",
                 answers: [
-                    { text: "Wake. Flash. Regretting these jeans.", animal: "Hot Flash Fox" },
+                    { text: "Wake. Flash. Regretting wearing these jeans.", animal: "Hot Flash Fox" },
                     { text: "Wake. Stare. Forgetting your phone passcode - again.", animal: "Brain Fog Bobcat" },
                     { text: "Wake. Cry. Laugh. Rage-texting your bestie.", animal: "Mood Swing Monkey" },
                     { text: "Wake. Sit. Considering a nap before lunch.", animal: "Sluggish Sloth" },
                     { text: "Wake. Snap. Ordering earbuds to wear while your partner eats.", animal: "Prickly Porcupine" },
-                    { text: "Wake. Weep. Dressing in your brightest colors.", animal: "Meltdown Macaw" },
                 ]
             },
-            {
+             {
                 question: "What’s your typical drink order?",
                 answers: [
                     { text: "Iced everything.", animal: "Hot Flash Fox" },
-                    { text: "I can’t remember what I ordered last time- surprise me.", animal: "Brain Fog Bobcat" },
-                    { text: "Whatever - One sip and suddenly I have opinions. Loud ones.", animal: "Mood Swing Monkey" },
+                    { text: "Um, you know, that cold, dark, sweet drink with bubbles.. What’s it called?", animal: "Brain Fog Bobcat" },
+                    { text: "Calming afternoon herbal tea - I need it after my mid-morning rage about toast crumbs.", animal: "Mood Swing Monkey" },
                     { text: "Anything, just make sure it’s caffeinated please.", animal: "Sluggish Sloth" },
-                    { text: "Calming afternoon herbal tea - I need it after my mid-morning rage.", animal: "Prickly Porcupine" },
-                    { text: "2/3 caff triple ristretto affogato venti, 2 pump mango 1 pump classic, 2%, mango to the second line, 3 scoops protein, 3 scoops berries, 2 scoop matcha, add banana, double blended, with whip, caramel drizzle, salted caramel topping, vanilla bean frappuccino.", animal: "Meltdown Macaw" },
+                    { text: "2/3 caff triple ristretto affogato venti, mango to the second line, 3 scoops protein, 3 scoops berries, 2 scoop matcha, add banana, double blended, with whip, caramel drizzle, salted caramel topping, vanilla bean frappuccino.", animal: "Prickly Porcupine" },
                 ]
             },
             {
                 question: "Your internal monologue during a random Tuesday afternoon:",
                 answers: [
-                    { text: "\"Why is it suddenly 500 degrees in here?\"", animal: "Hot Flash Fox" },
-                    { text: "\"What did I come in this room for again?\"", animal: "Brain Fog Bobcat" },
-                    { text: "\"I’m fine. No, I’m furious. Wait, now I’m crying.\"", animal: "Mood Swing Monkey" },
-                    { text: "\"I'm not saying I'm tired, but I could sleep standing up.\"", animal: "Sluggish Sloth" },
-                    { text: "\"If one more person breathes near me, I swear—\"", animal: "Prickly Porcupine" },
-                    { text: "\"I just cried over a cereal commercial. Again.\"", animal: "Meltdown Macaw" },
+                    { text: "Why is it suddenly 500 degrees in here?", animal: "Hot Flash Fox" },
+                    { text: "What did I come in this room for again?", animal: "Brain Fog Bobcat" },
+                    { text: "I’m fine. No, I’m furious. Wait, now I’m crying.", animal: "Mood Swing Monkey" },
+                    { text: "I'm not saying I'm tired, but I could sleep standing up.", animal: "Sluggish Sloth" },
+                    { text: "If one more person breathes near me, I swear—", animal: "Prickly Porcupine" },
                 ]
             },
-            {
+             {
                 question: "You open the fridge and forget what you needed. You:",
                 answers: [
                     { text: "Blame the heat. It’s obviously cooking your brain.", animal: "Hot Flash Fox" },
                     { text: "Blink slowly and hope it comes back to you.", animal: "Brain Fog Bobcat" },
-                    { text: "Slam it shut and make dinner reservations at your favorite eatery.", animal: "Mood Swing Monkey" },
+                    { text: "Slam it shut and make dinner reservations at your favorite restaurant.", animal: "Mood Swing Monkey" },
                     { text: "Grab some cheese, plop down and take a break.", animal: "Sluggish Sloth" },
                     { text: "Growl and start reorganizing everything.", animal: "Prickly Porcupine" },
-                    { text: "Sigh loudly like you're the lead actress in a drama.", animal: "Meltdown Macaw" },
                 ]
             },
             {
                 question: "How do you respond to compliments?",
                 answers: [
-                    { text: "\"Thanks. I’m sweating through this shirt, though.\"", animal: "Hot Flash Fox" },
-                    { text: "\"You’re so sweet! Wait, what did you say?\"", animal: "Brain Fog Bobcat" },
-                    { text: "\"OMG STOP I’M GONNA CRY.\"", animal: "Mood Swing Monkey" },
-                    { text: "\"Thanks. It was such an effort to make this happen.”", animal: "Sluggish Sloth" },
-                    { text: "\"Took long enough, honestly.\"", animal: "Prickly Porcupine" },
-                    { text: "\"Thanks! I’m not always this emotional… just kidding, yes I am, it's the hormones.\"", animal: "Meltdown Macaw" },
+                    { text: "I’m sweating through this shirt right now, but thanks.", animal: "Hot Flash Fox" },
+                    { text: "You’re so sweet! Wait, what did you say?", animal: "Brain Fog Bobcat" },
+                    { text: "OMG STOP I’M GONNA CRY.", animal: "Mood Swing Monkey" },
+                    { text: "Thanks. It was such an effort to make this happen.", animal: "Sluggish Sloth" },
+                    { text: "Thanks for noticing. Took long enough, honestly.", animal: "Prickly Porcupine" },
                 ]
             },
             {
                 question: "How’s your relationship with your body?",
                 answers: [
-                    { text: "It’s in combustion mode, thanks for asking", animal: "Hot Flash Fox" },
-                    { text: "It’s… familiar, but I forget the details", animal: "Brain Fog Bobcat" },
+                    { text: "It’s in combustion mode, thanks for asking.", animal: "Hot Flash Fox" },
+                    { text: "It’s… familiar, but I forget the details.", animal: "Brain Fog Bobcat" },
                     { text: "We fight. We make up. It’s complicated.", animal: "Mood Swing Monkey" },
                     { text: "It’s working hard. So am I. We’ll get there eventually.", animal: "Sluggish Sloth" },
                     { text: "It protests a lot. I protest harder.", animal: "Prickly Porcupine" },
-                    { text: "Honestly? We’re in a full soap opera.", animal: "Meltdown Macaw" },
                 ]
             },
-            {
+             {
                 question: "You just cried because:",
                 answers: [
-                    { text: "You overheated in the dentist chair", animal: "Hot Flash Fox" },
+                    { text: "You overheated in the dentist chair.", animal: "Hot Flash Fox" },
                     { text: "You forgot your address - Wait is it 3584 or 8354?", animal: "Brain Fog Bobcat" },
-                    { text: "You thought someone looked at you weird", animal: "Mood Swing Monkey" },
+                    { text: "You thought someone looked at you weird. Yea, they definitely did.", animal: "Mood Swing Monkey" },
                     { text: "Crying requires energy. Pass.", animal: "Sluggish Sloth" },
-                    { text: "Someone told you to “smile more”", animal: "Prickly Porcupine" },
-                    { text: "You felt the whole room judging you", animal: "Meltdown Macaw" },
+                    { text: "Am I the only one bothered by the knife scraping noises during dinner?", animal: "Prickly Porcupine" },
                 ]
             },
-            {
+             {
                 question: "What’s your peri/menopause superpower?",
                 answers: [
-                    { text: "Guessing what the thermostat temperature is set at", animal: "Hot Flash Fox" },
-                    { text: "Magic - I have a thought, then Poof! It’s gone", animal: "Brain Fog Bobcat" },
-                    { text: "Shifting emotional gears without a clutch", animal: "Mood Swing Monkey" },
-                    { text: "Falling asleep anywhere, anytime, forever", animal: "Sluggish Sloth" },
-                    { text: "Silencing people with a single glare", animal: "Prickly Porcupine" },
-                    { text: "Suddenly laughing hysterically then crying uncontrollably.", animal: "Meltdown Macaw" },
+                     { text: "Guessing what the thermostat temperature is set at.", animal: "Hot Flash Fox" },
+                    { text: "Magic - I have a thought, then Poof! It’s gone!", animal: "Brain Fog Bobcat" },
+                    { text: "Shifting emotional gears without a clutch.", animal: "Mood Swing Monkey" },
+                    { text: "Falling asleep anywhere, anytime, forever.", animal: "Sluggish Sloth" },
+                    { text: "Silencing people with a single glare.", animal: "Prickly Porcupine" },
                 ]
             },
             {
                 question: "Describe your texting style.",
                 answers: [
                     { text: "All emojis. Mostly flames.", animal: "Hot Flash Fox" },
-                    { text: "Forgetting to respond for 3 days", animal: "Brain Fog Bobcat" },
-                    { text: "ALL CAPS THEN APOLOGIES", animal: "Mood Swing Monkey" },
+                    { text: "Forgetting to respond for 3 days.", animal: "Brain Fog Bobcat" },
+                    { text: "Long, emotional essays with GIFs of crying cats.", animal: "Mood Swing Monkey" },
                     { text: "Short, sweet, and often cut off mid—", animal: "Sluggish Sloth" },
                     { text: "Passive-aggressive punctuation. Period.", animal: "Prickly Porcupine" },
-                    { text: "Long, emotional essays with GIFs of crying cats", animal: "Meltdown Macaw" },
                 ]
             },
             {
@@ -321,10 +393,9 @@
                 answers: [
                     { text: "“It’s like wearing a heated blanket on the inside.”", animal: "Hot Flash Fox" },
                     { text: "“You forget what you’re saying halfway through explaining it.”", animal: "Brain Fog Bobcat" },
-                    { text: "“Feelings. All the feelings. None of them make sense.”", animal: "Mood Swing Monkey" },
+                    { text: "“Imagine PMS. Now give it a crown and a megaphone.”", animal: "Mood Swing Monkey" },
                     { text: "“You’re tired, so tired.”", animal: "Sluggish Sloth" },
                     { text: "“Every little sound is a personal attack.”", animal: "Prickly Porcupine" },
-                    { text: "“Imagine PMS. Now give it a crown and a megaphone.”", animal: "Meltdown Macaw" },
                 ]
             },
             {
@@ -332,19 +403,18 @@
                 answers: [
                     { text: "“It's not easy being this hot.”", animal: "Hot Flash Fox" },
                     { text: "“Remember. Speak. Forget. Repeat.”", animal: "Brain Fog Bobcat" },
-                    { text: "“Strap in and enjoy the ride!”", animal: "Mood Swing Monkey" },
+                    { text: "“It’s not an overreaction if it’s justified.”", animal: "Mood Swing Monkey" },
                     { text: "“Everything is better after a nap.”", animal: "Sluggish Sloth" },
                     { text: "“Approach with caution.”", animal: "Prickly Porcupine" },
-                    { text: "“It’s not an overreaction if it’s justified.”", animal: "Meltdown Macaw" },
                 ]
             },
         ];
 
         const animalProfiles = {
             "Hot Flash Fox": {
-                symptom: "Sudden unpredictable hot flashes",
-                tagline: "No warning, all drama, maximum heat.",
-                description: "Fast, furious, and completely uninvited—just like a hot flash during a dinner party. Quick, clever, and always ready to shed your coat. You radiate heat and charisma—mostly because your body is literally on fire. One second you're fine, the next you’re fanning yourself with a takeout menu and whisper-shouting “Is it hot in here?!” Graceful under pressure (and sweat), you’re sly, striking, and a total smoke show—even when your internal thermostat is broken."
+                symptom: "Blazing, out-of-nowhere temperature surges",
+                tagline: "Too hot to handle—blazing trails (and occasionally your sheets) with foxy finesse.",
+                description: "You're sleek, savvy—and suddenly sweating through your blouse at the grocery store. Enter your Fox era: a master of poise with a body that treats temperature like a roulette wheel. One moment you’re cool and collected, the next you're clawing at layers like they personally betrayed you. Sharp-witted and always adapting, you’ve perfected the art of the graceful meltdown. Sly, smoldering, and slightly steamed—you’re a walking contradiction in lip gloss and a cooling towel."
             },
             "Brain Fog Bobcat": {
                 symptom: "Memory lapses and forgetfulness",
@@ -352,9 +422,9 @@
                 description: "Can’t remember why you walked into the kitchen? Elusive thoughts, mysterious errands, and mid-sentence memory vanishes? Mysterious. Elusive. Occasionally spotted, but never caught. You’re in your Bobcat era. Wildly intelligent but prone to sudden vanishing acts. You roam the mental wilderness with flashes of brilliance followed by—wait, what were we talking about again? You're agile, intuitive, and always circling back… eventually."
             },
             "Mood Swing Monkey": {
-                symptom: "Emotional instability",
-                tagline: "Unpredictable. Adorable. Probably crying.",
-                description: "Swinging from wild rage to weeping to existential crisis—in under 60 seconds. You’re vibrant, emotional, and unfiltered—in the most honest way possible. One minute you’re tossing bananas, the next you’re hugging strangers and pondering the meaning of life. Chaos? Maybe. Authentic? Absolutely. You feel deeply, react loudly, and love hard—even if your mascara doesn’t always survive the journey."
+                symptom: "Emotional highs, lows, and everything in between",
+                tagline: "Emotion unleashed—like setting a truth-telling monkey free in a glass house.",
+                description: "One moment you're cracking jokes and radiating sunshine, the next you're ready to throw coconuts at the universe. Welcome to your Monkey era—where feelings fly fast, free, and completely unfiltered. You swing through the emotional jungle with zero apologies and maximum authenticity. From tree-top joy to ground-level grump in under a minute? That’s not instability—it’s emotional range. Wild, expressive, and impossible to cage, you're a force of nature with a flair for dramatic exits and heartfelt re-entries."
             },
             "Sluggish Sloth": {
                 symptom: "Slowed metabolism and fatigue",
@@ -365,11 +435,6 @@
                 symptom: "Irritability and overstimulation",
                 tagline: "Looks soft. Actually very sharp.",
                 description: "Don’t talk to her before coffee, or after coffee. Actually—just don’t. You don’t tolerate fools—or noise—or crowds. And while you may look cuddly, you’ve got invisible quills and a short fuse. Your boundaries are sharp, your patience is limited, and your glare could silence your neighbor’s yapping dog. It’s not that you don’t like people… okay, maybe it is. But under that prickly exterior? A heart of gold—just don’t make any sudden movements."
-            },
-            "Meltdown Macaw": {
-                symptom: "Sudden emotional outbursts (aka midlife drama flares)",
-                tagline: "Flare-ups, but make them fabulous.",
-                description: "Gorgeous, dramatic, and completely justified in every overreaction. Big feelings, big reactions, big presence. You feel everything deeply, and express it loudly—with flair, feathers, and zero apologies. You’re the queen of “Did I overreact?” (Answer: Never.) Your moods come with sound effects, hand gestures, and occasional costume changes. Subtlety isn’t your style—and that’s exactly why everyone remembers you."
             }
         };
 
@@ -496,55 +561,35 @@
                     <p id="tagline"><b>Tagline:</b> “${profile.tagline}”</p>
                     <p id="animal-description">${profile.description}</p>
 
-                    <div class="share-section">
-                        <p class="share-message">Spirit animal unlocked. Menopause symptoms? Not the boss of you. Midlife is your comeback era—own it.</p>
-                        <div class="share-buttons">
-                            <button onclick="shareResults('${finalSpiritAnimal}')">Share and compare with your friends!</button>
-                        </div>
-                        <p id="copiedText" class="copied"></p>
+                    <div class="cta-section">
+                        <h2>What’s Next?</h2>
+                        <p>Now that you’ve met your menopause spirit animal, don’t let menopause symptoms call the shots.</p>
+                        
+                        <ul class="cta-list">
+                            <li>
+                                <a class="cta-card" href="https://www.menohello.com/articles" target="_blank">
+                                    <div class="cta-card-title">📚 Explore Articles</div>
+                                    <div class="cta-card-text">Curious about what you’re experiencing? Get clear, helpful info on your symptoms and what to do next.</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="cta-card" href="https://www.menohello.com/symptom-relief-for-menopause" target="_blank">
+                                    <div class="cta-card-title">🛍️ Shop Symptom Relief</div>
+                                    <div class="cta-card-text">Looking for real relief? Browse curated products and support picks tailored to your symptoms.</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="cta-card" href="https://www.menohello.com/newsletter-register" target="_blank">
+                                    <div class="cta-card-title">📬 Sign Up Here</div>
+                                    <div class="cta-card-text">Want midlife tips that actually make sense? Join our newsletter for expert advice, wit that gets it, and support with zero side-eye.</div>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <p class="cta-final">Because midlife isn’t a crisis—it’s your comeback season.</p>
                     </div>
                 </div>
             `;
-        }
-
-        // --- Sharing Functions ---
-        function getShareMessage(animal) {
-             // Use window.location.href to get the current page URL for sharing
-            return `My Menopause Spirit Animal is ${animal}! Spirit animal unlocked. Menopause symptoms? Not the boss of me. Midlife is my comeback era—I'm owning it. Find yours: ${window.location.href}`;
-        }
-
-        function shareResults(animal) {
-            const shareText = getShareMessage(animal);
-            const quizUrl = window.location.href; // The URL of the quiz page
-
-            if (navigator.share) {
-                navigator.share({
-                    title: `My Menopause Spirit Animal: ${animal}`,
-                    text: shareText,
-                    url: quizUrl
-                })
-                .then(() => {
-                    document.getElementById("copiedText").textContent = "✔️ Shared successfully!";
-                    document.getElementById("copiedText").style.display = "block";
-                })
-                .catch((error) => {
-                    console.error('Error sharing:', error);
-                    copyToClipboard(shareText); // Fallback to copy if native share fails
-                });
-            } else {
-                copyToClipboard(shareText);
-            }
-        }
-
-        function copyToClipboard(text) {
-            const dummy = document.createElement("textarea");
-            dummy.value = text;
-            document.body.appendChild(dummy);
-            dummy.select();
-            document.execCommand("copy");
-            document.body.removeChild(dummy);
-            document.getElementById("copiedText").textContent = "✔️ Message copied to clipboard!";
-            document.getElementById("copiedText").style.display = "block";
         }
 
         // Initialize the quiz when the page loads
